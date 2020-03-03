@@ -11,6 +11,7 @@ import android.util.Log;
 import android.util.SparseLongArray;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.threadUtils.TestThread;
@@ -25,15 +26,19 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     TestThread testThread = new TestThread(this);
+    public TextView TV1;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
         Button btn = findViewById(R.id.btn);
         Button btn1 = findViewById(R.id.btn1);
+        TV1=findViewById(R.id.TV1);
+
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,17 +53,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 testThread.test2();
                 Log.i("执行了", "testThread");
+
             }
         });
+
     }
 
 
     public Handler handler = new Handler() {
+
+
         @Override
         public void handleMessage(@NonNull Message msg) {
-
-            Log.i("result", msg.obj.toString());
             Map<Integer,Object> map=new HashMap<Integer,Object>();
+            Log.i("result", msg.obj.toString());
+
 
             switch (msg.obj.toString()) {
                 case "1":
@@ -66,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "2":
                     Toast.makeText(MainActivity.this, "获取成功", Toast.LENGTH_SHORT).show();
+                    break;
 
                 default:
                     try {
@@ -75,14 +85,21 @@ public class MainActivity extends AppCompatActivity {
                             map.put(1, jsonObject.getString("id"));
                             map.put(2, jsonObject.getString("O2"));
                             map.put(3, jsonObject.getString("CO2"));
+                            map.put(4,jsonObject.getString("WD"));
                         }
+                        Log.i("map",map.toString());
                         Log.i("id-->", map.get(1).toString());
                         Log.i("O2-->", map.get(2).toString());
                         Log.i("CO2-->", map.get(3).toString());
+                        Log.i("温度-->", map.get(4).toString());
                         Toast.makeText(MainActivity.this, map.get(3).toString(), Toast.LENGTH_LONG).show();
+
+                        TV1.setText("温度为"+map.get(4).toString()+"℃");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+
                     break;
             }
 
