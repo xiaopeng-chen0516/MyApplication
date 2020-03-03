@@ -29,8 +29,15 @@ public class TestThread {
                 String  s= NetUilts.loginOfGet("111","111");
 
                 Message msg = new Message();
-                msg.obj = s;
-                mainActivity.handler.sendMessage(msg);
+                if (s!=null){
+                    Log.i("线程中的值",s);
+
+                    msg.obj = 2;
+                    mainActivity.handler.sendMessage(msg);
+                }else {
+                    msg.obj =1;
+                    mainActivity.handler.sendMessage(msg);
+                }
             }
         }).start();
     }
@@ -43,10 +50,17 @@ public class TestThread {
             @Override
             public void run() {
                 String  s= NetUilts.loginofPost("111","111");
-                Log.i("线程中的值",s);
                 Message msg = new Message();
-                msg.obj = s;
-                mainActivity.handler.sendMessage(msg);
+                if (s!=null){
+                    Log.i("线程中的值",s);
+
+                    msg.obj = s;
+                    mainActivity.handler.sendMessage(msg);
+                }else {
+                    msg.obj =1;
+                    mainActivity.handler.sendMessage(msg);
+                }
+
             }
         }).start();
     }
