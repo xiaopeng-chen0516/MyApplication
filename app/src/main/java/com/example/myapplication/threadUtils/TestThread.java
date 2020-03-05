@@ -53,7 +53,6 @@ public class TestThread {
                 Message msg = new Message();
                 if (s!=null){
                     Log.i("线程中的值",s);
-
                     msg.obj = s;
                     mainActivity.handler.sendMessage(msg);
                 }else {
@@ -64,6 +63,51 @@ public class TestThread {
             }
         }).start();
     }
+
+    public void test3() {
+        /**
+         * POST请求
+         */
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(5000);
+                        Message msg = new Message();
+                        msg.what = 1;
+                        mainActivity.handler1.sendMessage(msg);
+
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            }).start();
+    }
+
+
+
+        public Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    try {
+                        Thread.sleep(5000);
+                        Message msg=new Message();
+                        msg.what=1;
+                        mainActivity.handler1.sendMessage(msg);
+
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        });
+
 
 
 

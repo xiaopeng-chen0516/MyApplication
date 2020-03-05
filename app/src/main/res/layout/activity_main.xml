@@ -26,4 +26,26 @@
         android:background="#E9E9E9"
         android:textSize="30dp"/>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否自动更新数据" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/thread_btn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+
 </LinearLayout>
